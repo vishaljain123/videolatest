@@ -15,6 +15,7 @@ Feel Free to commit, Appreciated.
   - Enter Name
   - Enter Same room name which entered before
   - And You Go....
+  - Note* Sometime demo not work becuase it is only 1 peer to peer chat. So best practice is to test on your local environment,
 
 ## If you want to run on your server
 
