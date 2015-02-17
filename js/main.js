@@ -13,6 +13,8 @@ var localVideoStream;
 var remoteVideoStream;
 var pc;
 
+var isFirefox = false;
+
 var dataChannel;
 
 var turnReady;
@@ -91,7 +93,9 @@ function createConnection() {
   }
   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
   navigator.getUserMedia(constraints, handleUserMedia, handleUserMediaError);
-
+  if(navigator.mozGetUserMedia) {
+    isFirefox = true;
+  }
   if (location.hostname != "localhost") {
     requestTurn('https://computeengineondemand.appspot.com/turn?username=41784574&key=4080218913');
   }
@@ -158,12 +162,12 @@ socket.on('message', function(message) {
     if (!isInitiator && !isStarted) {
       maybeStart();
     }
-    pc.setRemoteDescription(new RTCSessionDescription(message));
+    pc.setRemoteDescription(new getSessionDescription(message));
     doAnswer();
   } else if (message.type === 'answer' && isStarted) {
-    pc.setRemoteDescription(new RTCSessionDescription(message));
+    pc.setRemoteDescription(new getSessionDescription(message));
   } else if (message.type === 'candidate' && isStarted) {
-    var candidate = new RTCIceCandidate({
+    var candidate = getIceCandidate({
       sdpMLineIndex: message.label,
       candidate: message.candidate
     });
@@ -233,7 +237,7 @@ window.onbeforeunload = function(e) {
 function createPeerConnection() {
   try {
     var servers = null;
-    pc = new webkitRTCPeerConnection(servers, {
+    pc = new getRTCPeerConnection(servers, {
       optional: [{
         RtpDataChannels: true
       }]
@@ -249,6 +253,32 @@ function createPeerConnection() {
   }
 }
 
+function getSessionDescription(message) {
+  if(isFirefox){
+    return new mozRTCSessionDescription(message);
+  }
+  else{
+    return new RTCSessionDescription(message);
+  }
+}
+
+function getIceCandidate(params) {
+  if(isFirefox){
+    return new mozRTCIceCandidate(params);
+  }
+  else{
+    return new RTCIceCandidate(params);
+  }
+}
+
+function getRTCPeerConnection(params) {
+  if(isFirefox){
+    return new mozRTCPeerConnection(params);
+  }
+  else{
+    return new webkitRTCPeerConnection(params);
+  }
+}
 
 
 function handleIceCandidate(event) {
@@ -283,7 +313,12 @@ function doCall() {
 
 function doAnswer() {
   console.log('Sending answer to peer.');
-  pc.createAnswer(setLocalAndSendMessage, null, sdpConstraints);
+  if(isFirefox) {  
+    pc.createAnswer(setLocalAndSendMessage, handleCreateAnswerError, sdpConstraints);
+  }
+  else {
+    pc.createAnswer(setLocalAndSendMessage, null, sdpConstraints);
+  }
 }
 
 function setLocalAndSendMessage(sessionDescription) {
@@ -291,6 +326,10 @@ function setLocalAndSendMessage(sessionDescription) {
   sessionDescription.sdp = preferOpus(sessionDescription.sdp);
   pc.setLocalDescription(sessionDescription);
   sendMessage(sessionDescription);
+}
+
+function handleCreateAnswerError(error) {
+  console.log('createAnswer() error: ', e);
 }
 
 function requestTurn(turn_url) {
