@@ -1,7 +1,12 @@
 var static = require('node-static');
-var http = require('http');
+var https = require('https');
 var file = new(static.Server)();
-var app = http.createServer(function(req, res) {
+var fs = require('fs');
+var options = {
+    key: fs.readFileSync('HTTPS_Permissions/key.pem'),
+    cert: fs.readFileSync('HTTPS_Permissions/cert.pem')
+};  // Here the Permissions related to HTTPS are stored in the HTTPS_Permissions Folder
+var app = https.createServer( options, function(req, res) {
     file.serve(req, res);
 }).listen(process.env.PORT || 3000);
 
