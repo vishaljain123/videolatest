@@ -1,5 +1,7 @@
 ## PeerChat
 
+Announcement - I want to permanently transfer this repo to someone who can manage, because i am not actively in development with this app. I will transfer domain also to deserving person. Kindly Ping me on hirenkavad@ymail.com with your GitHub Profile.
+
 PeerChat is a Simple Project for Peer to Peer Video Chat with Node.js and Socket.io.
 Feel Free to commit, Appreciated.
 
