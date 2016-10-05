@@ -3,8 +3,8 @@ var https = require('https');
 var file = new(static.Server)();
 var fs = require('fs');
 var options = {
-    key: fs.readFileSync('HTTPS_Permissions/key.pem'),
-    cert: fs.readFileSync('HTTPS_Permissions/cert.pem')
+    //key: fs.readFileSync('HTTPS_Permissions/key.pem'),
+    //cert: fs.readFileSync('HTTPS_Permissions/cert.pem')
 };  // Here the Permissions related to HTTPS are stored in the HTTPS_Permissions Folder
 var app = https.createServer( options, function(req, res) {
     file.serve(req, res);
