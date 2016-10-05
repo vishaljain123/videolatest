@@ -1,6 +1,5 @@
 ## PeerChat
 
-Announcement - I want to permanently transfer this repo to someone who can manage, because i am not actively in development with this app. I will transfer domain also to deserving person. Kindly Ping me on hirenkavad@ymail.com with your GitHub Profile.
 
 PeerChat is a Simple Project for Peer to Peer Video Chat with Node.js and Socket.io.
 Feel Free to commit, Appreciated.
@@ -33,6 +32,8 @@ Feel Free to commit, Appreciated.
 
 * Hiren Kavad
 
+* Nathan Sire 
+
 ## License
 
 This bundle is dual-licensed under MIT and GPL licenses.
@@ -40,4 +41,3 @@ This bundle is dual-licensed under MIT and GPL licenses.
 * [http://www.opensource.org/licenses/mit-license.php](http://www.opensource.org/licenses/mit-license.php)
 * [http://www.gnu.org/licenses/gpl.html](http://www.gnu.org/licenses/gpl.html)
 
-Use it, change it, fork it, sell it. Do whatever you want, but please leave the author attribution.
