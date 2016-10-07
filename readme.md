@@ -34,9 +34,19 @@ https://peer-chat.herokuapp.com/
 
 ## Authors
 
+* Nathan Sire
+
 * Hiren Kavad
 
-* Nathan Sire 
+
+## Contributors
+
+* Shubham Chopra
+
+* Zachary Stenger
+
+* Athul B Raj
+
 
 ## License
 
