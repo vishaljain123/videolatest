@@ -5,6 +5,10 @@ PeerChat is a Simple Project for Peer to Peer Video Chat with Node.js and Socket
 Feel Free to commit, Appreciated.
 
 
+## Demo is being setup at
+
+https://peer-chat.herokuapp.com/
+
 
 ## Watch Live demo at
 
